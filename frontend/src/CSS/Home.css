@@ -1,0 +1,10 @@
+  .product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1rem;
+  justify-content: center; /* or 'flex-start' for left alignment */
+  box-sizing: border-box;
+  width: 100%;
+
+}

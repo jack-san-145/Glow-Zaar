@@ -1,0 +1,161 @@
+
+
+.product-detail-container {
+  display: flex;
+  gap: 50px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #000; /* Dark background */
+  color: #fff; /* Default text color is white */
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.image-section img {
+  width: 500px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgb(82, 82, 82)
+}
+
+.info-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sku {
+  font-size: 14px;
+  color: #bbb;
+  margin-bottom: 8px;
+}
+
+.product-name {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.price-section {
+  margin-right:0px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.current-price {
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+.sale-tag {
+  background-color: #fff;
+  color: #000;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.quantity-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.quantity-section button {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.add-to-cart,
+.buy-now {
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #fff;
+}
+
+.buy-now {
+  background-color: #ff4d4d;
+  color: #fff;
+}
+
+.add-to-cart:hover {
+  background-color: #eee;
+}
+
+.buy-now:hover {
+  background-color: #ff1a1a;
+}
+
+.product-specs {
+  margin-top: 24px;
+}
+
+.product-specs p {
+  margin-bottom: 8px;
+  color: #ddd;
+}
+
+.product-specs strong {
+  color: #fff;
+}
+
+h2 {
+  color: orange;
+  margin-right: 10px;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1rem;
+  justify-content: center; /* or 'flex-start' for left alignment */
+  box-sizing: border-box;
+  width: 100%;
+
+}
+
+
+.discount{
+  background-color: #212121;
+  color: #f60404;
+  padding: 12px 20px;
+  border:groove;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.status{
+  color: rgb(152, 249, 6);
+}
