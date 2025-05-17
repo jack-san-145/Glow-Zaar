@@ -24,8 +24,14 @@ function HomePage(){
         {pid:6,poster:jumkha_4,name:"Jumkha",price:299}
     ]
 
+    function cardClickHandler(id){
+        console.log(id)
+    }
+
     const ProductList=Products.map(
-        (product) =>  <ProductCard Product={product} key={product.pid}/> 
+        (product) =>  <ProductCard Product={product} key={product.pid} whenClicked={
+                                    ()=>{cardClickHandler(product.pid)}
+                                }/> 
     )
 
     return (

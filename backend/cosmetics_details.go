@@ -13,10 +13,22 @@ import (
 )
 
 type Product struct {
-	Pid    int    `json:"pid"`
-	Poster string `json:"poster"`
-	Name   string `json:"name"`
-	Price  int    `json:"price"`
+	Pid           string `json:"pid"`
+	Poster        string `json:"poster"`
+	Name          string `json:"name"`
+	SKU           string `json:"sku"`
+	Price         int    `json:"price"`
+	Brand         string `json:"brand"`
+	Category      string `json:"category"`
+	Color         string `json:"color"`
+	Material      string `json:"material"`
+	Weight        string `json:"weight"`
+	Size          string `json:"size"`
+	OriginalPrice string `json:"originalPrice"`
+	Sale          bool   `json:"sale"`
+	Discount      int    `json:"discount"`
+	Ordered       bool   `json:"ordered"`
+	AddToCart     bool   `json:"addToCart"`
 }
 
 var (
@@ -41,20 +53,20 @@ func minioInitialize() {
 
 	bucketName = "glowzaar-product-images"
 	// Set expiry time for the signed URL
-	expiry = time.Minute * 120 // link valid for 10 minutes
+	expiry = time.Minute * 120 // link valid for 2 hrs
 }
 
-var Cosmetics []Product = []Product{
-	{Pid: 1, Poster: "perfume_1.jpg", Name: "Janan", Price: 599},
-	{Pid: 2, Poster: "perfume_2.jpg", Name: "Daisy", Price: 459},
-	{Pid: 3, Poster: "powder_1.jpg", Name: "Ponds", Price: 999},
-	{Pid: 4, Poster: "mascara_1.jpg", Name: "Voluminous Mascara", Price: 250},
-	{Pid: 5, Poster: "lipstick_1.jpg", Name: "Remee", Price: 260},
-	{Pid: 6, Poster: "foundation_1.jpg", Name: "Lakme Foundation", Price: 299},
-	{Pid: 7, Poster: "facewash_4.jpg", Name: "Pond's Facewash", Price: 599},
-	{Pid: 8, Poster: "facewash_3.jpg", Name: "Himalaya Neem Face Wash", Price: 459},
-	{Pid: 9, Poster: "facewash_2.jpg", Name: "Carlton", Price: 999},
-	{Pid: 10, Poster: "facewash_1.jpg", Name: "Beardo", Price: 999},
+var Cosmetics = []Product{
+	{Pid: "cos-1", Poster: "perfume_1.jpg", Name: "Janan Eau de Parfum", SKU: "JAN-PFM-50ML", Price: 599, Brand: "Janan", Category: "Perfume", Color: "Clear", Material: "Glass bottle / liquid", Weight: "50 ml", Size: "50 ml", OriginalPrice: "₹799", Sale: true, Discount: 25, Ordered: false, AddToCart: false},
+	{Pid: "cos-2", Poster: "perfume_2.jpg", Name: "Daisy Eau de Toilette", SKU: "DAI-ET-30ML", Price: 459, Brand: "Daisy", Category: "Perfume", Color: "Pale Yellow", Material: "Glass bottle / liquid", Weight: "30 ml", Size: "30 ml", OriginalPrice: "₹659", Sale: true, Discount: 30, Ordered: false, AddToCart: false},
+	{Pid: "cos-3", Poster: "powder_1.jpg", Name: "Pond's Dreamflower Talc", SKU: "PON-TLC-400G", Price: 999, Brand: "Pond's", Category: "Talcum Powder", Color: "White", Material: "Plastic bottle / powder", Weight: "400 g", Size: "400 g", OriginalPrice: "₹1 299", Sale: true, Discount: 23, Ordered: false, AddToCart: false},
+	{Pid: "cos-4", Poster: "mascara_1.jpg", Name: "Voluminous Waterproof Mascara", SKU: "VOL-MSC-8ML", Price: 250, Brand: "Voluminous", Category: "Mascara", Color: "Black", Material: "Plastic tube / cream", Weight: "8 ml", Size: "Standard", OriginalPrice: "₹350", Sale: true, Discount: 29, Ordered: false, AddToCart: false},
+	{Pid: "cos-5", Poster: "lipstick_1.jpg", Name: "Remee Matte Lipstick-Cherry Red", SKU: "REM-LIP-CR01", Price: 260, Brand: "Remee", Category: "Lipstick", Color: "Cherry Red", Material: "Plastic case / stick", Weight: "3.5 g", Size: "Standard", OriginalPrice: "₹349", Sale: true, Discount: 25, Ordered: false, AddToCart: false},
+	{Pid: "cos-6", Poster: "foundation_1.jpg", Name: "Lakmé Invisible Finish Foundation (Shade 04)", SKU: "LAK-FND-25ML-04", Price: 299, Brand: "Lakmé", Category: "Foundation", Color: "Warm Beige", Material: "Glass bottle / liquid", Weight: "25 ml", Size: "25 ml", OriginalPrice: "₹399", Sale: true, Discount: 25, Ordered: false, AddToCart: false},
+	{Pid: "cos-7", Poster: "facewash_4.jpg", Name: "Pond's Pure Bright Facewash", SKU: "PON-FW-150ML", Price: 599, Brand: "Pond's", Category: "Face Wash", Color: "Charcoal Grey", Material: "Plastic tube / gel", Weight: "150 ml", Size: "150 ml", OriginalPrice: "₹749", Sale: true, Discount: 20, Ordered: false, AddToCart: false},
+	{Pid: "cos-8", Poster: "facewash_3.jpg", Name: "Himalaya Neem Face Wash", SKU: "HIM-FW-100ML", Price: 459, Brand: "Himalaya", Category: "Face Wash", Color: "Green Gel", Material: "Plastic tube / gel", Weight: "100 ml", Size: "100 ml", OriginalPrice: "₹575", Sale: true, Discount: 20, Ordered: false, AddToCart: false},
+	{Pid: "cos-9", Poster: "facewash_2.jpg", Name: "Carlton Fresh Foam Cleanser", SKU: "CAR-FW-120ML", Price: 999, Brand: "Carlton", Category: "Face Wash", Color: "White Foam", Material: "Plastic bottle / foam", Weight: "120 ml", Size: "120 ml", OriginalPrice: "₹1 299", Sale: true, Discount: 23, Ordered: false, AddToCart: false},
+	{Pid: "cos-10", Poster: "facewash_1.jpg", Name: "Beardo Deep Clean Facewash", SKU: "BRD-FW-200ML", Price: 999, Brand: "Beardo", Category: "Face Wash", Color: "Transparent Gel", Material: "Plastic tube / gel", Weight: "200 ml", Size: "200 ml", OriginalPrice: "₹1 399", Sale: true, Discount: 29, Ordered: false, AddToCart: false},
 }
 
 func cosmeticsHandler(w http.ResponseWriter, r *http.Request) {

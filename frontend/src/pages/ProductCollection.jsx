@@ -1,39 +1,52 @@
 import ProductCard from "../compartment/Collection_ProductCard"
-
-import jumkha_2 from '../assets/products/jumkha_2.jpg'
-import jumkha_3 from '../assets/products/jumkha_3.jpg'
-import jumkha_4 from '../assets/products/jumkha_4.jpg'
 import '../CSS/Home.css'
 import NavBar from "../compartment/NavBar"
 import 'react-router-dom'
-import { Link } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useEffect, useRef, useState } from "react"
+import ProductDetail from "./ProductDetails"
 
+ 
 
 function ProductCollection(){
 
     const [collection,setCollection]=useState([])
-   
-    useEffect(() => {
+    let loadedOnce=useRef(false)
+        useEffect(() => {
         async function LoadProducts() {
             try {
-                const response = await fetch("http://localhost:8989/load-cosmetics/");
-                const data = await response.json();
-                setCollection(data); // this updates the state and causes a re-render
+                if(!loadedOnce.current){
+                    const response = await fetch("http://localhost:8989/load-cosmetics/");
+                    const data = await response.json();
+                    setCollection(data); // this updates the state and causes a re-render
+                    loadedOnce.current=true
+                }
+                
             } catch (err) {
                 console.error("Failed to fetch products:", err);
             }
+
         }
 
         LoadProducts();
     }, []);
 
+    
+    const navigate=useNavigate()
+
+    function cardClickHandler(product){
+        console.log("Product clicked:", product);
+        navigate('/product-details',{state : {clickedProduct : product}})
+    }
+
     const categoryCollection=collection.map(
-        (selected_product) => <ProductCard Product={selected_product}/>
+        (selected_product) => <ProductCard Product={selected_product} key={selected_product.pid} 
+                                    whenClicked={()=> cardClickHandler(selected_product) } />
     )
     return (
         <>
             <NavBar/>
+            <br></br><br></br><br></br>
             <div className="product-grid">
                     {categoryCollection}
             </div>

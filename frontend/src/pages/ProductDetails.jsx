@@ -4,8 +4,11 @@ import ProductCard from '../compartment/Collection_ProductCard';
 import NavBar from '../compartment/NavBar';
 import jumkha_2 from '../assets/products/jumkha_2.jpg'
 import cosmetics from '../assets/products/cosmetics.jpg'
- const product = {
-    image: jumkha_2,
+import ProductCollection from './ProductCollection';
+import { useLocation } from 'react-router-dom';
+
+ let default_product = {
+    poster: jumkha_2,
     sku: "SKU12345",
     name: "Fan Air Cooler USB Electric Fan",
     brand: "Generic",
@@ -23,13 +26,19 @@ import cosmetics from '../assets/products/cosmetics.jpg'
   };
 
 function ProductDetail() {
+  const {state}=useLocation()
+  let product=state?.clickedProduct
+  console.log(product)
+  if(!product){
+    product=default_product
+  }
   return (
-<>
+<>  
     <NavBar/>
     <br/><br/><br/><br/><br/>
     <div className="product-detail-container">
       <div className="image-section">
-        <img src={product.image} alt={product.name} />
+        <img src={product.poster} alt={product.poster} />
       </div>
 
       <div className="info-section">
@@ -81,10 +90,11 @@ function ProductDetail() {
         <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
         <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
         <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
+        {/* <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
         <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
         <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
-        <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
-        <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
+        <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/> */}
+        
 
         </div>
     </div>

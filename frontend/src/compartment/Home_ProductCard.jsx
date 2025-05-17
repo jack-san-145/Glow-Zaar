@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import '../CSS/ProductCard.css' 
 import '../pages/ProductCollection.jsx'
-function ProductCard({Product}){
+function ProductCard({Product,whenClicked}){
     return(
         
     <div className='product-row'>
-        <div className="product-card">
+        <div className="product-card" onClick={whenClicked}>
             <Link to="/product-collection">
                 <img src={Product.poster} alt="product-img" className="product-image"/>
                 <div className="product-details">
