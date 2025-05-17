@@ -26,6 +26,9 @@ var (
 	expiry      time.Duration
 )
 
+var alreadyFetched bool
+var result []Product
+
 func minioInitialize() {
 	// Initialize MinIO client
 	minioClient, err = minio.New("localhost:9000", &minio.Options{
@@ -56,7 +59,9 @@ var Cosmetics []Product = []Product{
 
 func cosmeticsHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("running")
-	result := getImagesfromMinIO()
+	if !alreadyFetched {
+		getImagesfromMinIO()
+	}
 	fmt.Println(result)
 	WriteJson(w, http.StatusOK, r, result)
 }
@@ -70,9 +75,8 @@ func WriteJson(w http.ResponseWriter, status int, r *http.Request, data any) {
 	w.Write(temp)
 }
 
-func getImagesfromMinIO() []Product {
+func getImagesfromMinIO() {
 
-	var result []Product
 	for _, product := range Cosmetics {
 
 		objectName := "Cosmetics/" + product.Poster
@@ -86,5 +90,5 @@ func getImagesfromMinIO() []Product {
 		result = append(result, product)
 		fmt.Println("Presigned URL:", presignedURL.String())
 	}
-	return result
+	alreadyFetched = true
 }
