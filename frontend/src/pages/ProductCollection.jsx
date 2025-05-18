@@ -1,6 +1,6 @@
-import ProductCard from "../compartment/Collection_ProductCard"
+import ProductCard from "../component/Collection_ProductCard"
 import '../CSS/Home.css'
-import NavBar from "../compartment/NavBar"
+import NavBar from "../component/NavBar"
 import 'react-router-dom'
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
@@ -36,7 +36,8 @@ function ProductCollection(){
 
     function cardClickHandler(product){
         console.log("Product clicked:", product);
-        navigate('/product-details',{state : {clickedProduct : product}})
+        // navigate('/product-details',{state : {clickedProduct : product}})
+        return product
     }
 
     const categoryCollection=collection.map(

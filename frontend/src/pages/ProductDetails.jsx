@@ -1,11 +1,11 @@
 import '../CSS/ProductDetails.css';
 import body_spray from '../assets/products/body_spray.jpg'
-import ProductCard from '../compartment/Collection_ProductCard';
-import NavBar from '../compartment/NavBar';
+import ProductCard from '../component/Collection_ProductCard';
+import NavBar from '../component/NavBar';
 import jumkha_2 from '../assets/products/jumkha_2.jpg'
 import cosmetics from '../assets/products/cosmetics.jpg'
 import ProductCollection from './ProductCollection';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
  let default_product = {
     poster: jumkha_2,
@@ -32,6 +32,10 @@ function ProductDetail() {
   if(!product){
     product=default_product
   }
+
+  const {pid}=useParams()
+  // const product=
+
   return (
 <>  
     <NavBar/>
@@ -63,8 +67,8 @@ function ProductDetail() {
         </div>          
         <div className="action-buttons">
         
-          <button className="add-to-cart">Add to cart</button>
-          <button className="buy-now">Buy it now</button>
+          <button className="add-to-cart" >Add to cart</button>
+          <button className="buy-now" >Buy it now</button>
         </div>
           {product.ordered ?(<h2 className='status'>Ordered Successfully</h2>)
                             :product.addToCart ?(<h2 className='status'>Added to cart</h2>)

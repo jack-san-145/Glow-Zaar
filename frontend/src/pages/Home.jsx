@@ -1,4 +1,4 @@
-import ProductCard from '../compartment/Home_ProductCard'
+import ProductCard from '../component/Home_ProductCard'
 import baby_cloth from '../assets/products/baby_cloth.jpg'
 import body_spray from '../assets/products/body_spray.jpg'
 import cosmetics from '../assets/products/cosmetics.jpg'
@@ -11,7 +11,7 @@ import watch_1 from '../assets/products/watch_1.jpg'
 import watch_2 from '../assets/products/watch_2.jpg'
 import women_cloth from '../assets/products/women_cloth.jpg'
 import '../CSS/Home.css'
-import NavBar from '../compartment/NavBar'
+import NavBar from '../component/NavBar'
 
 function HomePage(){
 

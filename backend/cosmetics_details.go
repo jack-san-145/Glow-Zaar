@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -76,15 +75,6 @@ func cosmeticsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println(result)
 	WriteJson(w, http.StatusOK, r, result)
-}
-
-func WriteJson(w http.ResponseWriter, status int, r *http.Request, data any) {
-	w.Header().Add("Content-Type", "application/json")
-	temp, err := json.Marshal(data)
-	if err != nil {
-		http.Error(w, "Something went wrong", http.StatusInternalServerError)
-	}
-	w.Write(temp)
 }
 
 func getImagesfromMinIO() {
