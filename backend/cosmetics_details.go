@@ -73,7 +73,7 @@ func cosmeticsHandler(w http.ResponseWriter, r *http.Request) {
 	if !alreadyFetched {
 		getImagesfromMinIO()
 	}
-	fmt.Println(result)
+	// fmt.Println("result")
 	WriteJson(w, http.StatusOK, r, result)
 }
 
@@ -90,7 +90,7 @@ func getImagesfromMinIO() {
 		product.Poster = urlStr
 		// objectName := "products/shoe1.jpg"
 		result = append(result, product)
-		fmt.Println("Presigned URL:", presignedURL.String())
+		// fmt.Println("Presigned URL:", presignedURL.String())
 	}
 	alreadyFetched = true
 }

@@ -6,37 +6,72 @@ import jumkha_2 from '../assets/products/jumkha_2.jpg'
 import cosmetics from '../assets/products/cosmetics.jpg'
 import ProductCollection from './ProductCollection';
 import { useLocation, useParams } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
 
- let default_product = {
-    poster: jumkha_2,
-    sku: "SKU12345",
-    name: "Fan Air Cooler USB Electric Fan",
-    brand: "Generic",
-    category: "Electronics",
-    color: "White",
-    material: "Plastic",
-    weight: "120 grams",
-    size: "29D x 21W x 26H cm",
-    originalPrice: 867,
-    price: 1178.82,
-    sale: true,
-    discount:20,
-    ordered:true,
-    addToCart:true
-  };
+
 
 function ProductDetail() {
-  const {state}=useLocation()
-  let product=state?.clickedProduct
-  console.log(product)
-  if(!product){
-    product=default_product
+
+  let product;
+  const {pid}=useParams()
+  console.log("pid value - ",pid)
+  const [product_collection,setProduct]=useState([])
+  let loadedOnce=useRef(false)
+
+  useEffect(()=>{
+    console.log("Use effect triggered - ",pid)
+
+      async function fetching(){
+      console.log("fetching calling")
+      if(!loadedOnce.current){
+          try {
+          const response=await fetch("http://localhost:8989/load-cosmetics/")
+          const data=await response.json()
+          setProduct(data)
+          loadedOnce.current=true
+        } catch (error) {
+          console.log("Failed to fetch products : ",error)
+        }
+      }
+    }
+      fetching()
+
+    },[])
+  
+  if(product_collection.length==0){
+    return(
+      <h2>loading....</h2>
+    );
   }
 
-  const {pid}=useParams()
-  // const product=
+let filtered_products=[];
+function parsing(){
+  let count=0
+  for(let i=product_collection.length-1;i>=0;i--){
+    if(pid==product_collection[i].pid)
+    {
+      product=product_collection[i]
+    }
 
-  return (
+      if([0,4,7,9].includes(i)){
+        filtered_products.push(product_collection[i])
+        count+=1
+      }
+  }
+}
+parsing()
+
+console.log("product",product)
+console.log("filtered_products",filtered_products)
+
+const SimilarProduct=filtered_products.map(
+  (selected_product) => <ProductCard Product={selected_product} key={selected_product.pid} 
+                                     />
+    
+)
+
+
+return (
 <>  
     <NavBar/>
     <br/><br/><br/><br/><br/>
@@ -90,15 +125,8 @@ function ProductDetail() {
     <div className='recommends'>
         <h2>Similar Products</h2>
         <div className='product-grid'>
-        <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
-        <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
-        <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
-        <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
-        {/* <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
-        <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
-        <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/>
-        <ProductCard Product={{pid:3,poster:cosmetics,name:"Cosmetics",price:999}}/> */}
         
+        {SimilarProduct}
 
         </div>
     </div>

@@ -34,15 +34,10 @@ function ProductCollection(){
     
     const navigate=useNavigate()
 
-    function cardClickHandler(product){
-        console.log("Product clicked:", product);
-        // navigate('/product-details',{state : {clickedProduct : product}})
-        return product
-    }
 
     const categoryCollection=collection.map(
         (selected_product) => <ProductCard Product={selected_product} key={selected_product.pid} 
-                                    whenClicked={()=> cardClickHandler(selected_product) } />
+                                     />
     )
     return (
         <>

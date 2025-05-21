@@ -3,12 +3,12 @@ import '../CSS/ProductCard.css'
 
 
 
-function ProductCard({Product,whenClicked}){
+function ProductCard({Product}){
     return(
         
     <div className='product-row'>
-        <div className="product-card" onClick={whenClicked}>
-            <Link to='/product-details/${whenClicked.pid}' >
+        <div className="product-card">
+            <Link to={`/product-details/${Product.pid}`} >
                 <img src={Product.poster} alt="product-img" className="product-image"/>
                 <div className="product-details">
                     <h3>{Product.name}</h3>

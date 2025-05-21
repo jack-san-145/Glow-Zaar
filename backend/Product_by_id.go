@@ -14,7 +14,7 @@ func productByPid(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("given id", id)
 	var product Product
 	var isMatch bool
-	for _, value := range Cosmetics {
+	for _, value := range result {
 		if value.Pid == id {
 			isMatch = true
 			product = value
