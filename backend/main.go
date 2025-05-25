@@ -20,9 +20,10 @@ func withCORS(next http.HandlerFunc) http.HandlerFunc {
 		next(w, r)
 	}
 }
+
 func main() {
 	router := mux.NewRouter()
-	router.HandleFunc("/load-cosmetics/", withCORS(cosmeticsHandler)).Methods("GET")
+	router.HandleFunc("/load-products/{product_type}", withCORS(getProducts)).Methods("GET")
 	router.HandleFunc("/product-details/{pid}", withCORS(productByPid)).Methods("GET")
 	minioInitialize() //initialize minIO client
 	fmt.Println("server is running")

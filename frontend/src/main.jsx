@@ -16,7 +16,7 @@ const my_router=createBrowserRouter([
     errorElement :<PageNotFound/>
   },
   {
-    path : '/product-collection',
+    path : '/product-collection/:product_type_id',
     element : <ProductCollection/>,
     errorElement : <PageNotFound/>
   },
@@ -25,7 +25,7 @@ const my_router=createBrowserRouter([
     element : <ProductDetails/>
   },
   {
-    path : '/product-details/:pid',
+    path : '/product-details/:pid/:product_type_id',
     element : <ProductDetails/>,
     errorElement : <PageNotFound/> 
   }

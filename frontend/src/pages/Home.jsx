@@ -16,12 +16,12 @@ import NavBar from '../component/NavBar'
 function HomePage(){
 
     const Products=[
-        {pid:1,poster:baby_cloth,name:"Baby Cloth",price:599},
-        {pid:2,poster:body_spray,name:"Body Spray",price:459},
-        {pid:3,poster:cosmetics,name:"Cosmetics",price:999},
-        {pid:4,poster:jumkha_2,name:"Jumkha",price:250},
-        {pid:5,poster:jumkha_3,name:"Jumkha",price:260},
-        {pid:6,poster:jumkha_4,name:"Jumkha",price:299}
+        {product_type_id:"cloth",poster:baby_cloth,name:"Baby Cloth",price:599},
+        {product_type_id:"Mobile",poster:body_spray,name:"Body Spray",price:459},
+        {product_type_id:"Cosmetics",poster:cosmetics,name:"Cosmetics",price:999},
+        {product_type_id:"jewels",poster:jumkha_2,name:"Jumkha",price:250},
+        {product_type_id:"Fashion",poster:jumkha_3,name:"Jumkha",price:260},
+        {product_type_id:"accessoriers",poster:jumkha_4,name:"Jumkha",price:299}
     ]
 
     function cardClickHandler(id){
@@ -29,8 +29,8 @@ function HomePage(){
     }
 
     const ProductList=Products.map(
-        (product) =>  <ProductCard Product={product} key={product.pid} whenClicked={
-                                    ()=>{cardClickHandler(product.pid)}
+        (product) =>  <ProductCard Product={product} key={product.product_type_id} whenClicked={
+                                    ()=>{cardClickHandler(product.product_type_id)}
                                 }/> 
     )
 

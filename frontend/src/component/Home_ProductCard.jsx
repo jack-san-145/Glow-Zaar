@@ -6,7 +6,7 @@ function ProductCard({Product,whenClicked}){
         
     <div className='product-row'>
         <div className="product-card" onClick={whenClicked}>
-            <Link to="/product-collection">
+            <Link to={`/product-collection/${Product.product_type_id}`}>
                 <img src={Product.poster} alt="product-img" className="product-image"/>
                 <div className="product-details">
                     <h3>{Product.name}</h3>

@@ -8,7 +8,7 @@ function ProductCard({Product}){
         
     <div className='product-row'>
         <div className="product-card">
-            <Link to={`/product-details/${Product.pid}`} >
+            <Link to={`/product-details/${Product.pid}/${Product.product_type_id}`} >
                 <img src={Product.poster} alt="product-img" className="product-image"/>
                 <div className="product-details">
                     <h3>{Product.name}</h3>
