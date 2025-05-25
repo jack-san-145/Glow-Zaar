@@ -3,9 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
-
 )
-
 
 func WriteError(w http.ResponseWriter, status int, msg string) {
 	w.Header().Add("Content-Type", "application/json")
