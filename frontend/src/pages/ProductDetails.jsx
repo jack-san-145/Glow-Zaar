@@ -8,7 +8,7 @@ import ProductCollection from './ProductCollection';
 import { useLocation, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 
-
+const cache_product_details={}
 
 function ProductDetail() {
 
@@ -18,22 +18,29 @@ function ProductDetail() {
   console.log("Product type - ",product_type_id)
   const [product_collection,setProduct]=useState([])
   let loadedOnce=useRef(false)
+  
 
   useEffect(()=>{
     console.log("Use effect triggered - ",pid)
     console.log("use trigger - ",product_type_id)
       async function fetching(){
       console.log("fetching calling")
-      if(!loadedOnce.current){
-          try {
-          const response=await fetch(`http://localhost:8989/load-products/${product_type_id}`)
-          const data=await response.json()
-          setProduct(data)
-          loadedOnce.current=true
-        } catch (error) {
-          console.log("Failed to fetch products : ",error)
-        }
+
+      if(cache_product_details[product_type_id]){
+        setProduct(cache_product_details[product_type_id])
       }
+      else{
+          try {
+            const response=await fetch(`http://localhost:8989/load-products/${product_type_id}`)
+            const data=await response.json()
+            cache_product_details[product_type_id]=data
+            setProduct(data)
+          } catch (error) {
+            console.log("Failed to fetch products : ",error)
+          }
+      }
+
+          
     }
       fetching()
 
