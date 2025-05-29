@@ -9,7 +9,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 
 const cache_product_details={}
-
+let quantity=0
 function ProductDetail() {
 
   let product;
@@ -17,6 +17,7 @@ function ProductDetail() {
   console.log("pid value - ",pid)
   console.log("Product type - ",product_type_id)
   const [product_collection,setProduct]=useState([])
+  const [itemCount,setItemCount]=useState(0)
   let loadedOnce=useRef(false)
   
 
@@ -101,9 +102,11 @@ return (
         </div>
 
         <div className="quantity-section">
-          <button>-</button>
-          <span>1</span>
-          <button>+</button>
+          <button onClick={()=>{setItemCount(itemCount-1);console.log(itemCount)}}>-</button>
+          {
+            itemCount<0 ?(<span>0</span>):(<span>{itemCount}</span>)
+          }
+          <button onClick={()=>{setItemCount(itemCount+1);console.log(itemCount)}}>+</button>
         </div>
         <div className='action-buttons'>
             <button className='discount'>Apply Discount  ({product.discount}%) </button>
@@ -113,10 +116,10 @@ return (
           <button className="add-to-cart" >Add to cart</button>
           <button className="buy-now" >Buy it now</button>
         </div>
-          {product.ordered ?(<h2 className='status'>Ordered Successfully</h2>)
+          {/* {product.ordered ?(<h2 className='status'>Ordered Successfully</h2>)
                             :product.addToCart ?(<h2 className='status'>Added to cart</h2>)
                             :(<h2></h2>)
-          }
+          } */}
         <div className="product-specs">
          <h2>Specifications</h2>
           <p><strong>Product Name:</strong> {product.name}</p>

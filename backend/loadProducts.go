@@ -3,43 +3,66 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/gorilla/mux"
+	"glow/database"
+	"glow/shared"
 	"log"
 	"net/http"
-
-	"github.com/gorilla/mux"
 )
 
-func loadProducts(w http.ResponseWriter, r *http.Request, product_array []Product, product_type string) {
+var Cached_result = make(map[string][]shared.Product)
+
+func loadProducts(w http.ResponseWriter, r *http.Request, product_array []shared.Product, product_type string) {
 	fmt.Println("Loading products ......")
-	var result []Product
+	var result []shared.Product
+	if val, ok := Cached_result[product_type]; ok {
+		result = val
+		fmt.Println("Cached result ..")
+	} else {
+		//we don't use here the pointer variable by iterate for loop by index
+		for _, product := range product_array {
 
-	for _, product := range product_array {
-
-		objectName := product_type + "/" + product.Poster
-		presignedURL, err := minioClient.PresignedGetObject(context.Background(), bucketName, objectName, expiry, nil)
-		if err != nil {
-			log.Fatalln(err)
+			objectName := product_type + "/" + product.Poster
+			presignedURL, err := minioClient.PresignedGetObject(context.Background(), bucketName, objectName, expiry, nil)
+			if err != nil {
+				log.Fatalln(err)
+			}
+			urlStr := presignedURL.String()
+			product.Poster = urlStr
+			// objectName := "products/shoe1.jpg"
+			result = append(result, product)
+			// fmt.Println("Presigned URL:", presignedURL.String())
 		}
-		urlStr := presignedURL.String()
-		product.Poster = urlStr
-		// objectName := "products/shoe1.jpg"
-		result = append(result, product)
-		// fmt.Println("Presigned URL:", presignedURL.String())
+		Cached_result[product_type] = result
 	}
-	// alreadyFetched = true
+
 	WriteJson(w, http.StatusAccepted, r, result)
 
 }
 
 func getProducts(w http.ResponseWriter, r *http.Request) {
-	var product_array []Product
+	var (
+		product_array []shared.Product
+		err           error
+	)
 	fmt.Println("geting products .....")
 	value := mux.Vars(r)
 	product_type := value["product_type"]
-	if product_type == "Cosmetics" {
-		product_array = Cosmetics
-	} else if product_type == "jewels" {
-		product_array = Jewels
+	// if product_type == "Cosmetics" {
+	// 	product_array = Cosmetics
+	// } else if product_type == "jewels" {
+	// 	product_array = Jewels
+	// }
+
+	if val, ok := Cached_result[product_type]; ok {
+		fmt.Println("cached Database ..")
+		product_array = val
+	} else {
+		product_array, err = database.GetProductsDb(product_type)
+		if err != nil {
+			fmt.Println("error from database while fetching data ")
+			return
+		}
 	}
 	loadProducts(w, r, product_array, product_type)
 

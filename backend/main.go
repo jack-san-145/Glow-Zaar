@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"glow/database"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -24,8 +25,9 @@ func withCORS(next http.HandlerFunc) http.HandlerFunc {
 func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/load-products/{product_type}", withCORS(getProducts)).Methods("GET")
-	router.HandleFunc("/product-details/{pid}", withCORS(productByPid)).Methods("GET")
-	minioInitialize() //initialize minIO client
+	// router.HandleFunc("/product-details/{pid}", withCORS(productByPid)).Methods("GET")
+	database.ConnectDB() // connect to the database
+	minioInitialize()    //initialize minIO client
 	fmt.Println("server is running")
 	serve := http.ListenAndServe(":8989", router)
 	if serve != nil {
