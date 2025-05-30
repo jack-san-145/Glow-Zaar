@@ -48,17 +48,14 @@ func getProducts(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("geting products .....")
 	value := mux.Vars(r)
 	product_type := value["product_type"]
-	// if product_type == "Cosmetics" {
-	// 	product_array = Cosmetics
-	// } else if product_type == "jewels" {
-	// 	product_array = Jewels
-	// }
 
 	if val, ok := Cached_result[product_type]; ok {
 		fmt.Println("cached Database ..")
 		product_array = val
 	} else {
 		product_array, err = database.GetProductsDb(product_type)
+		fmt.Println("Fetched from database....")
+		fmt.Println("product_array - ", product_array)
 		if err != nil {
 			fmt.Println("error from database while fetching data ")
 			return

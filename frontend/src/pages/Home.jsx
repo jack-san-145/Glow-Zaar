@@ -18,7 +18,7 @@ function HomePage(){
     const Products=[
         {product_type_id:"cloth",poster:baby_cloth,name:"Baby Cloth",price:599},
         {product_type_id:"Mobile",poster:body_spray,name:"Body Spray",price:459},
-        {product_type_id:"Cosmetics",poster:cosmetics,name:"Cosmetics",price:999},
+        {product_type_id:"cosmetics",poster:cosmetics,name:"cosmetics",price:999},
         {product_type_id:"jewels",poster:jumkha_2,name:"Jumkha",price:250},
         {product_type_id:"Fashion",poster:jumkha_3,name:"Jumkha",price:260},
         {product_type_id:"accessoriers",poster:jumkha_4,name:"Jumkha",price:299}
