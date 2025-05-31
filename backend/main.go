@@ -24,8 +24,11 @@ func withCORS(next http.HandlerFunc) http.HandlerFunc {
 
 func main() {
 	router := mux.NewRouter()
-	router.HandleFunc("/load-products/{product_type}", withCORS(getProducts)).Methods("GET")
+	router.HandleFunc("/load-products/{product_type}", withCORS(GetProducts)).Methods("GET")
 	// router.HandleFunc("/product-details/{pid}", withCORS(productByPid)).Methods("GET")
+	router.HandleFunc("/glow-zaar/MyCart", withCORS(GetMyCards)).Methods("GET")
+	router.HandleFunc("/glow-zaar/login", withCORS(LoginHandler)).Methods("POST")
+	router.HandleFunc("/glow-zaar/register", withCORS(RegistrationHandler)).Methods("POST")
 	database.ConnectDB() // connect to the database
 	minioInitialize()    //initialize minIO client
 	fmt.Println("server is running")

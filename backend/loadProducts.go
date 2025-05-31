@@ -12,7 +12,7 @@ import (
 
 var Cached_result = make(map[string][]shared.Product)
 
-func loadProducts(w http.ResponseWriter, r *http.Request, product_array []shared.Product, product_type string) {
+func LoadProducts(w http.ResponseWriter, r *http.Request, product_array []shared.Product, product_type string) {
 	fmt.Println("Loading products ......")
 	var result []shared.Product
 	if val, ok := Cached_result[product_type]; ok {
@@ -40,7 +40,7 @@ func loadProducts(w http.ResponseWriter, r *http.Request, product_array []shared
 
 }
 
-func getProducts(w http.ResponseWriter, r *http.Request) {
+func GetProducts(w http.ResponseWriter, r *http.Request) {
 	var (
 		product_array []shared.Product
 		err           error
@@ -61,6 +61,6 @@ func getProducts(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	loadProducts(w, r, product_array, product_type)
+	LoadProducts(w, r, product_array, product_type)
 
 }
