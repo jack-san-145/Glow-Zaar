@@ -12,6 +12,8 @@ import watch_2 from '../assets/products/watch_2.jpg'
 import women_cloth from '../assets/products/women_cloth.jpg'
 import '../CSS/Home.css'
 import NavBar from '../component/NavBar'
+import Login from './Login'
+import Register from './Register'
 
 function HomePage(){
 

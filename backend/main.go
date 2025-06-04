@@ -12,6 +12,7 @@ func withCORS(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 
 		if r.Method == "OPTIONS" {
@@ -27,6 +28,7 @@ func main() {
 	router.HandleFunc("/load-products/{product_type}", withCORS(GetProducts)).Methods("GET")
 	// router.HandleFunc("/product-details/{pid}", withCORS(productByPid)).Methods("GET")
 	router.HandleFunc("/glow-zaar/MyCart", withCORS(GetMyCards)).Methods("GET")
+	router.HandleFunc("/glow-zaar/MyOrders", withCORS(getMyOrders)).Methods("GET")
 	router.HandleFunc("/glow-zaar/login", withCORS(LoginHandler)).Methods("POST")
 	router.HandleFunc("/glow-zaar/register", withCORS(RegistrationHandler)).Methods("POST")
 	database.ConnectDB() // connect to the database

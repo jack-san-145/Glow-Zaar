@@ -45,6 +45,12 @@ func GetProducts(w http.ResponseWriter, r *http.Request) {
 		product_array []shared.Product
 		err           error
 	)
+	cookie, _ := r.Cookie("session_id")
+	if cookie != nil {
+		fmt.Println("cookie present in product")
+	} else {
+		fmt.Println("cookie not present in product")
+	}
 	fmt.Println("geting products .....")
 	value := mux.Vars(r)
 	product_type := value["product_type"]
