@@ -30,7 +30,7 @@ function ProductCollection(){
 
                 try {
                         console.log("running")
-                        const response = await fetch(`http://localhost:8989/load-products/${product_type_id}`);
+                        const response = await fetch(`/glow-zaar/load-products/${product_type_id}`);
                         const data = await response.json();
                         cache_product[product_type_id]=data
                         setCollection(data); // this updates the state and causes a re-render

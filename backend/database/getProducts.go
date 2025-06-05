@@ -39,6 +39,7 @@ func GetProductsDb(product_type_id string) ([]shared.Product, error) {
 				&product.OriginalPrice,
 				&product.Sale,
 				&product.Discount,
+				&product.IsProduct,
 			)
 			if err != nil {
 				fmt.Println("error when fetching products from db")

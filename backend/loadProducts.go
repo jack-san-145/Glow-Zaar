@@ -12,17 +12,17 @@ import (
 
 var Cached_result = make(map[string][]shared.Product)
 
-func LoadProducts(w http.ResponseWriter, r *http.Request, product_array []shared.Product, product_type string) {
+func LoadProducts(w http.ResponseWriter, r *http.Request, product_array *[]shared.Product, product_type *string) {
 	fmt.Println("Loading products ......")
 	var result []shared.Product
-	if val, ok := Cached_result[product_type]; ok {
+	if val, ok := Cached_result[*product_type]; ok {
 		result = val
 		fmt.Println("Cached result ..")
 	} else {
 		//we don't use here the pointer variable by iterate for loop by index
-		for _, product := range product_array {
+		for _, product := range *product_array {
 
-			objectName := product_type + "/" + product.Poster
+			objectName := *product_type + "/" + product.Poster
 			presignedURL, err := minioClient.PresignedGetObject(context.Background(), bucketName, objectName, expiry, nil)
 			if err != nil {
 				log.Fatalln(err)
@@ -33,7 +33,7 @@ func LoadProducts(w http.ResponseWriter, r *http.Request, product_array []shared
 			result = append(result, product)
 			// fmt.Println("Presigned URL:", presignedURL.String())
 		}
-		Cached_result[product_type] = result
+		Cached_result[*product_type] = result
 	}
 
 	WriteJson(w, http.StatusAccepted, r, result)
@@ -67,6 +67,6 @@ func GetProducts(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	LoadProducts(w, r, product_array, product_type)
+	LoadProducts(w, r, &product_array, &product_type)
 
 }

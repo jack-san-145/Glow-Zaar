@@ -32,7 +32,7 @@ function ProductDetail() {
       }
       else{
           try {
-            const response=await fetch(`http://localhost:8989/load-products/${product_type_id}`)
+            const response=await fetch(`/glow-zaar/load-products/${product_type_id}`)
             const data=await response.json()
             cache_product_details[product_type_id]=data
             setProduct(data)

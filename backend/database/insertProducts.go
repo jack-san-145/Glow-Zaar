@@ -28,12 +28,23 @@ func InsertProduct(productList []shared.Product) {
 			product.OriginalPrice,
 			product.Sale,
 			product.Discount,
+			product.IsProduct,
 		)
 
 		if err != nil {
 			fmt.Println("something error while inserting products")
 		} else {
 			fmt.Println("successfully added - ", result)
+		}
+	}
+}
+
+func InsertHomeProduct(product_type []shared.Category) {
+	query := "insert into Category(product_type,poster) values(?,?)"
+	for _, EachProductType := range product_type {
+		_, err := Db.Exec(query, EachProductType.Product_type_id, EachProductType.Poster)
+		if err != nil {
+			fmt.Println("error while inserting products category")
 		}
 	}
 }

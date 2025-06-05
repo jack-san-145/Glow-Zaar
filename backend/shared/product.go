@@ -17,4 +17,11 @@ type Product struct {
 	OriginalPrice   string `json:"originalPrice"`
 	Sale            bool   `json:"sale"`
 	Discount        int    `json:"discount"`
+	IsProduct       bool   `json:"isproduct"`
+}
+
+type Category struct {
+	Product_type_id string `json:"product_type_id"`
+	Poster          string `json:"poster"`
+	IsProduct       bool   `json:"isproduct"`
 }

@@ -1,4 +1,4 @@
-import ProductCard from '../component/Home_ProductCard'
+import ProductCard from '../component/ProductCard'
 import baby_cloth from '../assets/products/baby_cloth.jpg'
 import body_spray from '../assets/products/body_spray.jpg'
 import cosmetics from '../assets/products/cosmetics.jpg'
@@ -14,38 +14,55 @@ import '../CSS/Home.css'
 import NavBar from '../component/NavBar'
 import Login from './Login'
 import Register from './Register'
+import { useEffect, useState } from 'react'
 
 function HomePage(){
 
-    const Products=[
-        {product_type_id:"cloth",poster:baby_cloth,name:"Baby Cloth",price:599},
-        {product_type_id:"Mobile",poster:body_spray,name:"Body Spray",price:459},
-        {product_type_id:"cosmetics",poster:cosmetics,name:"cosmetics",price:999},
-        {product_type_id:"jewels",poster:jumkha_2,name:"Jumkha",price:250},
-        {product_type_id:"Fashion",poster:jumkha_3,name:"Jumkha",price:260},
-        {product_type_id:"accessoriers",poster:jumkha_4,name:"Jumkha",price:299}
-    ]
+    const [Products,setProducts]=useState(null)
 
-    function cardClickHandler(id){
-        console.log(id)
-    }
+    useEffect(()=>{
+       async function loadHomeCard()
+       {
 
-    const ProductList=Products.map(
-        (product) =>  <ProductCard Product={product} key={product.product_type_id} whenClicked={
-                                    ()=>{cardClickHandler(product.product_type_id)}
-                                }/> 
-    )
+        const response=await fetch("/glow-zaar/home",{
+            credentials :"include"
+        })
+        const data =await response.json()
+        setProducts(data)
+        }
+        loadHomeCard()
+    },[])
 
-    return (
-        <div className='home'>
-            <NavBar/>
-            <br/><br/><br/>
-            <div className='product-grid'>
-                
-                {ProductList}
+    if(!Products){
+        return(
+            <div>
+                <NavBar/>
+                <h2>Loading Home Page</h2>
             </div>
-        </div>
-    );
+        )
+    }
+    else{
+            function cardClickHandler(id){
+                console.log(id)
+            }
+
+         const ProductList=Products.map(
+            (product) =>  <ProductCard Product={product} key={product.product_type_id} whenClicked={
+                                        ()=>{cardClickHandler(product.product_type_id)}
+                                    }/> 
+            )
+
+        return (
+            <div className='home'>
+                <NavBar/>
+                <br/><br/><br/>
+                <div className='product-grid'>
+                    
+                    {ProductList}
+                </div>
+            </div>
+        );
+    }
 }
 
 export default HomePage

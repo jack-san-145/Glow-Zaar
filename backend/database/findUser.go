@@ -18,7 +18,7 @@ func FindUserId(email string, password string) int {
 
 func FindUserBySessionId(session_id string) int {
 	var UserID int
-	query := "select user_id from User where session_id = ?"
+	query := "select user_id from Sessions where session_id = ? "
 	err := Db.QueryRow(query, session_id).Scan(&UserID)
 	if err != nil {
 		fmt.Println("error while finding userid from session id")
