@@ -1,3 +1,115 @@
-h1{
-    color: white;
+.cart-wrapper {
+  background-color: #000;
+  min-height: 100vh;
+  padding: 2rem;
+  color: white;
+}
+
+.cart-title {
+  font-size: 28px;
+  color: orange;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* ✅ Full-width row fix */
+.cart-row-full {
+  width: 700px;
+  height: 270px;
+  display: flex;
+  background-color: #1a1a1a;
+  margin: 0 auto 1.5rem auto;
+  border-radius: 16px;
+  box-shadow: 0 0 2px orange;
+  overflow: hidden;
+  transition: all 0.6s ease;
+}
+
+.cart-row-full:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px orange;
+}
+
+/* ✅ Fix image alignment and size */
+.cart-img-left {
+  width: 300px;
+  height: 100%;
+  object-fit: cover;
+  border-right: 3px solid orange;
+}
+
+/* ✅ Ensure right content fills remaining space */
+.cart-details {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Spacing and font styles */
+.cart-details h3 {
+  margin: 0 0 0.5rem;
+  font-size: 26px;
+  color: #fff;
+}
+
+.cart-details p {
+  margin: 0.4rem 0;
+  color: #ccc;
+  font-size: 18px;
+}
+
+.cart-buttons {
+  margin-top: 1.2rem;
+}
+
+.btn {
+  padding: 0.7rem 1.6rem;
+  margin-right: 1rem;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn.delete {
+  background-color: crimson;
+  color: white;
+}
+
+.btn.order {
+  background-color: orange;
+  color: black;
+}
+.cart-header {
+  display: flex;
+  max-width: 1000px;
+  margin: 0 auto 2rem auto;
+  padding: 0 1rem;
+}
+
+.cart-title {
+  font-size: 28px;
+  color: orange;
+  margin: 0;
+}
+
+/* Proceed button */
+.btn.proceed-pay {
+  background-color: orange;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0.7rem 1.6rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 10px orange;
+}
+
+.btn.proceed-pay:hover {
+  background-color: #ffaa00;
+  box-shadow: 0 0 15px orange;
 }

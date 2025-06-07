@@ -25,3 +25,11 @@ type Category struct {
 	Poster          string `json:"poster"`
 	IsProduct       bool   `json:"isproduct"`
 }
+
+type CartProducts struct {
+	Name     string `json:"name"`
+	Pid      string `json:"pid"`
+	Quantity int    `json:"quantity"`
+	Price    int    `json:"price"`
+	Poster   string `json:"poster"`
+}

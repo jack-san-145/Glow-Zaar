@@ -3,13 +3,15 @@ import './index.css'
 import App from './App.jsx'
 import {createBrowserRouter,RouterProvider} from 'react-router-dom'
 import HomePage from './pages/Home.jsx'
-import MyCart from './pages/MyCart.jsx'
 import Register from './pages/Register.jsx'
 import Login from './pages/Login.jsx'
 import PageNotFound from './component/PageNotFound.jsx'
 import ProductCollection from './pages/ProductCollection.jsx'
 import ProductDetails from './pages/ProductDetails.jsx'
 import MyOrders from './pages/MyOrders.jsx'
+import MyCartProducts from './pages/MyCartProducts.jsx'
+import MyCartStatus from './pages/MyCartStatus.jsx'
+
 
 
 
@@ -34,11 +36,6 @@ const my_router=createBrowserRouter([
     errorElement : <PageNotFound/> 
   },
   {
-    path : '/MyCart',
-    element : <MyCart/>,
-    errorElement :<PageNotFound/>
-  },
-  {
     path:'/register',
     element : <Register/>,
     errorElement :<PageNotFound/>
@@ -51,6 +48,16 @@ const my_router=createBrowserRouter([
   {
     path:'/MyOrders',
     element : <MyOrders/>,
+    errorElement :<PageNotFound/>
+  },
+  {
+    path:'/MyCartProducts',
+    element :<MyCartProducts/>,
+    errorElement :<PageNotFound/>
+  },
+  {
+    path:'/myCartStatus',
+    element :<MyCartStatus/>,
     errorElement :<PageNotFound/>
   }
 ])

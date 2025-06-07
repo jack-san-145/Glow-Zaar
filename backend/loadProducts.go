@@ -23,7 +23,7 @@ func LoadProducts(w http.ResponseWriter, r *http.Request, product_array *[]share
 		for _, product := range *product_array {
 
 			objectName := *product_type + "/" + product.Poster
-			presignedURL, err := minioClient.PresignedGetObject(context.Background(), bucketName, objectName, expiry, nil)
+			presignedURL, err := shared.MinioClient.PresignedGetObject(context.Background(), shared.BucketName, objectName, shared.Expiry, nil)
 			if err != nil {
 				log.Fatalln(err)
 			}

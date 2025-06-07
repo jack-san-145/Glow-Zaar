@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"glow/database"
+	"glow/shared"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -27,13 +28,16 @@ func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/glow-zaar/load-products/{product_type}", withCORS(GetProducts)).Methods("GET")
 	// router.HandleFunc("/product-details/{pid}", withCORS(productByPid)).Methods("GET")
-	router.HandleFunc("/glow-zaar/MyCart", withCORS(GetMyCards)).Methods("GET")
+	router.HandleFunc("/glow-zaar/GetMyCardStatus", withCORS(GetMyCardStatus)).Methods("GET")
+	router.HandleFunc("/glow-zaar/GetMyCardProducts", withCORS(GetMyCardProducts)).Methods("GET")
 	router.HandleFunc("/glow-zaar/MyOrders", withCORS(getMyOrders)).Methods("GET")
 	router.HandleFunc("/glow-zaar/login", withCORS(LoginHandler)).Methods("POST")
 	router.HandleFunc("/glow-zaar/register", withCORS(RegistrationHandler)).Methods("POST")
+	router.HandleFunc("/glow-zaar/addToCart", withCORS(AddToCart)).Methods("POST")
 	router.HandleFunc("/glow-zaar/home", withCORS(LoadIndex)).Methods("GET")
-	database.ConnectDB() // connect to the database
-	minioInitialize()    //initialize minIO client
+	router.HandleFunc("/glow-zaar/remove/{pid}", withCORS(RemoveFromCart)).Methods("GET")
+	database.ConnectDB()     // connect to the database
+	shared.MinioInitialize() //initialize minIO client
 
 	fmt.Println("server is running")
 	serve := http.ListenAndServe(":8989", router)

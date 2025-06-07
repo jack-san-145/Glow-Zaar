@@ -10,7 +10,26 @@ import { useEffect, useRef, useState } from 'react';
 
 const cache_product_details={}
 let quantity=0
+const discountOnce={}
 function ProductDetail() {
+
+
+  async function addToCart(){
+      try {
+        const response=await fetch("/glow-zaar/addToCart",{
+          method : "POST",
+          headers: {
+            'Content-Type': 'application/json'  
+          },
+          body : JSON.stringify({"pid":product.pid,"price":product.price,"quantity":itemCount})
+
+        })
+        const data=await response.json()
+        console.log("data from addToCart - ",data)
+      } catch (error) {
+        console.log("error occured while fetching add to cart",err)
+      }
+  }
 
   let product;
   const {pid,product_type_id}=useParams()
@@ -18,8 +37,8 @@ function ProductDetail() {
   console.log("Product type - ",product_type_id)
   const [product_collection,setProduct]=useState([])
   const [itemCount,setItemCount]=useState(0)
+  const[applyDiscount,setDiscount]=useState(0)
   let loadedOnce=useRef(false)
-  
 
   useEffect(()=>{
     console.log("Use effect triggered - ",pid)
@@ -106,14 +125,35 @@ return (
           {
             itemCount<0 ?(<span>0</span>):(<span>{itemCount}</span>)
           }
-          <button onClick={()=>{setItemCount(itemCount+1);console.log(itemCount)}}>+</button>
+          <button onClick={()=>{
+            let temp=itemCount
+             if(temp+1>product.quantity)
+            {
+              setItemCount(itemCount)
+            }else{
+              setItemCount(itemCount+1)
+            }
+            console.log(itemCount)}}>+</button>
         </div>
         <div className='action-buttons'>
-            <button className='discount'>Apply Discount  ({product.discount}%) </button>
+            <button className='discount' onClick={()=>{
+              console.log("discount clicking")
+              if(!discountOnce[product.pid]){
+                let discount=product.discount
+                let discountAmount=(discount/100)*product.price
+                product.price=Math.round(product.price-discountAmount)
+                console.log("discount - ",discount)
+                console.log("DiscountAmount - ",discountAmount)
+                console.log("product price - ",product.price)
+                setDiscount(product.price)
+                discountOnce[product.pid]=true
+              }
+              
+            }}>Apply Discount  ({product.discount}%) </button>
         </div>          
         <div className="action-buttons">
         
-          <button className="add-to-cart" >Add to cart</button>
+          <button className="add-to-cart" onClick={()=>{addToCart()}} >Add to cart</button>
           <button className="buy-now" >Buy it now</button>
         </div>
           {/* {product.ordered ?(<h2 className='status'>Ordered Successfully</h2>)

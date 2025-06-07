@@ -9,7 +9,6 @@ import (
 	"net/http"
 )
 
-var UserID int
 var result_Category []shared.Category
 
 var totatProductType []shared.Category
@@ -18,7 +17,7 @@ func loadCategory(w http.ResponseWriter, r *http.Request, totalProductType *[]sh
 	if len(result_Category) == 0 {
 		for _, HomeCard := range *totalProductType {
 			objectName := HomeCard.Poster
-			presignedURL, err := minioClient.PresignedGetObject(context.Background(), bucketName, objectName, expiry, nil)
+			presignedURL, err := shared.MinioClient.PresignedGetObject(context.Background(), shared.BucketName, objectName, shared.Expiry, nil)
 			if err != nil {
 				log.Fatalln("error while fetching category card from minio")
 			}
@@ -35,7 +34,7 @@ func loadCategory(w http.ResponseWriter, r *http.Request, totalProductType *[]sh
 func LoadIndex(w http.ResponseWriter, r *http.Request) {
 	cookie, _ := r.Cookie("session_id")
 	if cookie != nil {
-		UserID = database.FindUserBySessionId(cookie.Value)
+		UserID := database.FindUserBySessionId(cookie.Value)
 		fmt.Println("UserID - ", UserID)
 	} else {
 		fmt.Println("User id not found")
