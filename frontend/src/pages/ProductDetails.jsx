@@ -28,7 +28,7 @@ function ProductDetail() {
         })
         const data=await response.json()
         console.log("data from buy now - ",data)
-        setStatusMessage("Ordered Successfully")
+        setStatusMessage("Ordered Successfully - Confirmation sent to your Email")
         
       } catch (error) {
         console.log("error occured while fetching buy it now ",err)

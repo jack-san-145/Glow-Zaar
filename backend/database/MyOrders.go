@@ -36,6 +36,13 @@ func BuyItNowDb(pid string, quantity int, price int, userId int) {
 		}
 		fmt.Println("successfully inserted the record(buy it now) to the orders")
 		insertBuyToOrderItems(pid, quantity, price, order_id)
+		name, email, product := FindEmail(userId, pid)
+		err = SendOrderConfirmationEmail(email, name, product, quantity, price, findDeliveryDate(findOrderedTime(order_id)))
+		if err != nil {
+			fmt.Println("email not sending....")
+			return
+		}
+		fmt.Printf("email sent to %v", email)
 	}
 
 }
