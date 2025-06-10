@@ -28,14 +28,19 @@ func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/glow-zaar/load-products/{product_type}", withCORS(GetProducts)).Methods("GET")
 	// router.HandleFunc("/product-details/{pid}", withCORS(productByPid)).Methods("GET")
-	router.HandleFunc("/glow-zaar/GetMyCardStatus", withCORS(GetMyCardStatus)).Methods("GET")
 	router.HandleFunc("/glow-zaar/GetMyCardProducts", withCORS(GetMyCardProducts)).Methods("GET")
-	router.HandleFunc("/glow-zaar/MyOrders", withCORS(getMyOrders)).Methods("GET")
+	router.HandleFunc("/glow-zaar/GetMyOrderProducts", withCORS(GetMyOrderProducts)).Methods("GET")
 	router.HandleFunc("/glow-zaar/login", withCORS(LoginHandler)).Methods("POST")
 	router.HandleFunc("/glow-zaar/register", withCORS(RegistrationHandler)).Methods("POST")
 	router.HandleFunc("/glow-zaar/addToCart", withCORS(AddToCart)).Methods("POST")
+	router.HandleFunc("/glow-zaar/buyNow", withCORS(BuyNowHandler)).Methods("POST")
 	router.HandleFunc("/glow-zaar/home", withCORS(LoadIndex)).Methods("GET")
-	router.HandleFunc("/glow-zaar/remove/{pid}", withCORS(RemoveFromCart)).Methods("GET")
+	router.HandleFunc("/glow-zaar/remove/{pid}", withCORS(RemoveFromCart)).Methods("DELETE")
+	router.HandleFunc("/glow-zaar/place-order", withCORS(PlaceOrderFromCart)).Methods("POST")
+	router.HandleFunc("/glow-zaar/order-all-cartProducts", withCORS(OrderAllCartProducts)).Methods("GET")
+	router.HandleFunc("/glow-zaar/my-profile-status", withCORS(ProfileStatus)).Methods("GET")
+	router.HandleFunc("/glow-zaar/my-profile", withCORS(MyProfile)).Methods("GET")
+	router.HandleFunc("/glow-zaar/logout", withCORS(Logout)).Methods("GET")
 	database.ConnectDB()     // connect to the database
 	shared.MinioInitialize() //initialize minIO client
 

@@ -1,0 +1,121 @@
+.myorders-main-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #0a0a0a;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Left: Orders list */
+/* .orders-section {
+  flex: 3;
+} */
+
+/* Right: Delivery Info */
+.delivery-info-box {
+  flex: 1;
+  background: linear-gradient(145deg, #1b1b1b, #111);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255, 165, 0, 0.4);
+  color: #ffc400;
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+  margin-top: 150px;
+}
+
+.delivery-info-box h2 {
+  margin-bottom: 1rem;
+  color: orange;
+  font-size: 1.5rem;
+}
+
+.delivery-info-box p {
+  font-size: 1rem;
+  color: #f0f0f0;
+  margin: 0.5rem 0;
+}
+
+/* 🟠 Order Card */
+.order-card {
+  display: flex;
+  background: #1a1a1a;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  height: 300px;
+  width: 800px;
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.25);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.order-card:hover {
+  transform: scale(1.015);
+  box-shadow: 0 0 15px rgba(255, 140, 0, 0.5);
+}
+
+/* 🖼️ Image Section */
+.image-sec {
+  width: 590px;
+  height: 100%;
+  
+}
+
+.order-image {
+
+  max-width: 100%;
+  max-height: 100%;
+  object-fit:cover;
+  margin-right: 100px;
+}
+
+/* ℹ️ Order Info */
+.order-info {
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.order-info h3 {
+  font-size: 1.6rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.p-tag {
+  margin: 0.3rem 0;
+  font-size: 1.05rem;
+  color: #c6c4c4;
+}
+
+/* ✅ Ordered Badge */
+.badge {
+  margin-top: 1rem;
+  background: black;
+  color:  orange;
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  box-shadow: 0 0 6px #ffa600;
+  animation:  1.5s ease-in-out infinite alternate;
+}
+.badge:hover{
+    background-color: rgb(239, 166, 9);
+    color:black;
+}
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px orange;
+  }
+  to {
+    box-shadow: 0 0 20px orange;
+  }
+}
+.delivery-date{
+  color:orange;
+}

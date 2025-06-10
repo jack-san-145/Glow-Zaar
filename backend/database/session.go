@@ -7,7 +7,6 @@ import (
 	"github.com/google/uuid"
 )
 
-
 func GenerateSessionId(email string, password string) string {
 
 	deleteQuery := "delete from Sessions where expires_at < now() "
@@ -24,4 +23,12 @@ func GenerateSessionId(email string, password string) string {
 		fmt.Println("Error while inserting seesion id's ")
 	}
 	return sessionId
+}
+
+func DeleteSession(session_id string) {
+	query := "delete from Sessions where session_id - ? "
+	_, err := Db.Exec(query, session_id)
+	if err != nil {
+		fmt.Println("error while deleting session ")
+	}
 }

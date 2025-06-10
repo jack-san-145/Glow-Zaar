@@ -8,8 +8,8 @@ function NavBar(){
         <div className="nav-items">
           <Link to="/">Home</Link>
           <Link to="/myCartStatus">My Cart</Link>
-          <Link to="/mycartsample">Profile</Link>
-          <Link to="/MyOrders">My Orders</Link>
+          <Link to="/myprofileStatus">Profile</Link>
+          <Link to="/myOrderStatus">My Orders</Link>
           <div className="search-bar">
             <i className="fas fa-search" />
             <input type="text" placeholder="Search..." />

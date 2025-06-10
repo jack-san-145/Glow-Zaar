@@ -11,9 +11,29 @@ import { useEffect, useRef, useState } from 'react';
 const cache_product_details={}
 let quantity=0
 const discountOnce={}
+let ordered=false
+
 function ProductDetail() {
+  const [statusMessage, setStatusMessage] = useState("");
+  
+  async function buyNow(){
+      try {
+        const response=await fetch("/glow-zaar/buyNow",{
+          method : "POST",
+          headers: {
+            'Content-Type': 'application/json'  
+          },
+          body : JSON.stringify({"pid":product.pid,"price":product.price,"quantity":itemCount})
 
-
+        })
+        const data=await response.json()
+        console.log("data from buy now - ",data)
+        setStatusMessage("Ordered Successfully")
+        
+      } catch (error) {
+        console.log("error occured while fetching buy it now ",err)
+      }
+  }
   async function addToCart(){
       try {
         const response=await fetch("/glow-zaar/addToCart",{
@@ -26,17 +46,25 @@ function ProductDetail() {
         })
         const data=await response.json()
         console.log("data from addToCart - ",data)
+        setStatusMessage("Added to cart")
+        
       } catch (error) {
         console.log("error occured while fetching add to cart",err)
       }
   }
+  useEffect(() => {
+  if (statusMessage) {
+    const timer = setTimeout(() => setStatusMessage(""), 2000);
+    return () => clearTimeout(timer);
+  }
+}, [statusMessage]);
 
   let product;
   const {pid,product_type_id}=useParams()
   console.log("pid value - ",pid)
   console.log("Product type - ",product_type_id)
   const [product_collection,setProduct]=useState([])
-  const [itemCount,setItemCount]=useState(0)
+  const [itemCount,setItemCount]=useState(1)
   const[applyDiscount,setDiscount]=useState(0)
   let loadedOnce=useRef(false)
 
@@ -123,7 +151,7 @@ return (
         <div className="quantity-section">
           <button onClick={()=>{setItemCount(itemCount-1);console.log(itemCount)}}>-</button>
           {
-            itemCount<0 ?(<span>0</span>):(<span>{itemCount}</span>)
+            itemCount<=1 ?(<span>1</span>):(<span>{itemCount}</span>)
           }
           <button onClick={()=>{
             let temp=itemCount
@@ -154,12 +182,10 @@ return (
         <div className="action-buttons">
         
           <button className="add-to-cart" onClick={()=>{addToCart()}} >Add to cart</button>
-          <button className="buy-now" >Buy it now</button>
+          <button className="buy-now" onClick={()=>{buyNow()}}>Buy it now</button>
         </div>
-          {/* {product.ordered ?(<h2 className='status'>Ordered Successfully</h2>)
-                            :product.addToCart ?(<h2 className='status'>Added to cart</h2>)
-                            :(<h2></h2>)
-          } */}
+          {statusMessage && <h2 className='status'>{statusMessage}</h2>}
+          
         <div className="product-specs">
          <h2>Specifications</h2>
           <p><strong>Product Name:</strong> {product.name}</p>

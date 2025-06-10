@@ -33,3 +33,20 @@ type CartProducts struct {
 	Price    int    `json:"price"`
 	Poster   string `json:"poster"`
 }
+
+type OrderedProducts struct {
+	Name         string `json:"name"`
+	Pid          string `json:"pid"`
+	Quantity     int    `json:"quantity"`
+	Price        int    `json:"price"`
+	Poster       string `json:"poster"`
+	OrderedDate  string `json:"orderedDate"`
+	DeliveryDate string `json:"deliveryDate"`
+}
+
+type Profile struct {
+	Name    string `json:"name"`
+	Age     int    `json:"age"`
+	Email   string `json:"email"`
+	Address string `json:"address"`
+}

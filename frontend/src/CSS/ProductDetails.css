@@ -1,5 +1,4 @@
 
-
 .product-detail-container {
   display: flex;
   gap: 50px;
@@ -116,11 +115,11 @@
 }
 
 .product-specs {
-  margin-top: 24px;
+  margin-top: 0px;
 }
 
 .product-specs p {
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   color: #ddd;
 }
 
@@ -156,6 +155,25 @@ h2 {
   transition: background-color 0.3s ease;
 }
 
-.status{
-  color: rgb(152, 249, 6);
+.status {
+  font-size: 24px;
+  color: rgb(3, 240, 3);
+  text-align: center;
+  margin-top: 20px;
+  animation: fadeGlow 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+/* Keyframes for fade-in + glow */
+@keyframes fadeGlow {
+  0% {
+    opacity: 0;
+    text-shadow: none;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 10px rgb(11, 250, 11), 0 0 20px rgb(4, 235, 4);
+    transform: translateY(0);
+  }
 }

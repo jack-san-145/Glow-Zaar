@@ -22,7 +22,7 @@ function Register() {
 
     try {
       const encoded = new URLSearchParams(formData);
-      const response = await fetch("http://localhost:8989/glow-zaar/register", {
+      const response = await fetch("/glow-zaar/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"

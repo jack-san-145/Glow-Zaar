@@ -51,3 +51,22 @@ h1 {
 }
 
 
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000000; /* black */
+  color: white; /* optional: make text visible on dark bg */
+  font-family: 'Poppins', sans-serif;
+}
+input {
+  background-color: #000;     /* or #1a1a1a for dark gray */
+  color: #fff;                /* white text */
+  border: 1px solid #ffa500;  /* optional: glowing orange border */
+  padding: 0.6rem;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+input::placeholder {
+  color: #888; /* light gray for visibility */
+}

@@ -8,10 +8,9 @@ import Login from './pages/Login.jsx'
 import PageNotFound from './component/PageNotFound.jsx'
 import ProductCollection from './pages/ProductCollection.jsx'
 import ProductDetails from './pages/ProductDetails.jsx'
-import MyOrders from './pages/MyOrders.jsx'
-import MyCartProducts from './pages/MyCartProducts.jsx'
-import MyCartStatus from './pages/MyCartStatus.jsx'
-
+import { MyOrderStatus } from './pages/MyOrders.jsx'
+import { MyCartStatus } from './pages/MyCartStatus.jsx'; 
+import { ProfileStatus } from './pages/ProfilePage.jsx'
 
 
 
@@ -46,19 +45,19 @@ const my_router=createBrowserRouter([
     errorElement :<PageNotFound/>
   },
   {
-    path:'/MyOrders',
-    element : <MyOrders/>,
-    errorElement :<PageNotFound/>
-  },
-  {
-    path:'/MyCartProducts',
-    element :<MyCartProducts/>,
-    errorElement :<PageNotFound/>
-  },
-  {
     path:'/myCartStatus',
     element :<MyCartStatus/>,
     errorElement :<PageNotFound/>
+  },
+  {
+    path : '/myOrderStatus',
+    element : <MyOrderStatus/>,
+    errorElement : <PageNotFound/>
+  },
+  {
+    path : 'myprofileStatus',
+    element : <ProfileStatus/>,
+    errorElement : <PageNotFound/>
   }
 ])
 
