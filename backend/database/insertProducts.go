@@ -1,7 +1,6 @@
 package database
 
 import (
-	// "database/sql"
 	"fmt"
 	"glow/shared"
 
@@ -28,11 +27,10 @@ func InsertProduct(productList []shared.Product) {
 			product.OriginalPrice,
 			product.Sale,
 			product.Discount,
-			product.IsProduct,
 		)
 
 		if err != nil {
-			fmt.Println("something error while inserting products")
+			fmt.Println("something error while inserting products - ", err)
 		} else {
 			fmt.Println("successfully added - ", result)
 		}
@@ -44,7 +42,7 @@ func InsertHomeProduct(product_type []shared.Category) {
 	for _, EachProductType := range product_type {
 		_, err := Db.Exec(query, EachProductType.Product_type_id, EachProductType.Poster)
 		if err != nil {
-			fmt.Println("error while inserting products category")
+			fmt.Println("error while inserting products category - ", err)
 		}
 	}
 }

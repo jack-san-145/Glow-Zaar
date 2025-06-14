@@ -40,7 +40,7 @@ func AddThisToCart(pid string, price int, quantity int, userId int) {
 		query := "insert into OrderItems(order_id,pid,quantity,price) values(?,?,?,?)"
 		_, err := Db.Exec(query, order_id, pid, quantity, price)
 		if err != nil {
-			fmt.Println("Faliure to insert to the cart order items")
+			fmt.Println("Faliure to insert to the cart order items - ", err)
 		} else {
 			fmt.Println("inserted cart to Order items")
 		}

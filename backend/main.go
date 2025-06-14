@@ -43,7 +43,6 @@ func main() {
 	router.HandleFunc("/glow-zaar/logout", withCORS(Logout)).Methods("GET")
 	database.ConnectDB()     // connect to the database
 	shared.MinioInitialize() //initialize minIO client
-
 	fmt.Println("server is running")
 	serve := http.ListenAndServe(":8989", router)
 	if serve != nil {

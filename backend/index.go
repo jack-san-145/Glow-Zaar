@@ -47,11 +47,3 @@ func LoadIndex(w http.ResponseWriter, r *http.Request) {
 
 	loadCategory(w, r, &totatProductType)
 }
-
-func insCart() {
-	category := []shared.Category{
-		{Product_type_id: "cosmetics", Poster: "cosmetics.jpg", IsProduct: false},
-		{Product_type_id: "jewels", Poster: "jewels.jpg", IsProduct: false},
-	}
-	database.InsertHomeProduct(category)
-}

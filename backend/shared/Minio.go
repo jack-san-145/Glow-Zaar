@@ -16,7 +16,7 @@ var (
 )
 
 func MinioInitialize() {
-	// Initialize MinIO client
+	// Initialize MinIO client  192.168.250.106
 	MinioClient, Err = minio.New("192.168.250.106:9000", &minio.Options{
 		Creds:  credentials.NewStaticV4("Jack-san", "Jack@145", ""),
 		Secure: false, // set true if https

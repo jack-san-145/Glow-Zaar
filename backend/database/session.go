@@ -26,9 +26,9 @@ func GenerateSessionId(email string, password string) string {
 }
 
 func DeleteSession(session_id string) {
-	query := "delete from Sessions where session_id - ? "
+	query := "delete from Sessions where session_id = ? "
 	_, err := Db.Exec(query, session_id)
 	if err != nil {
-		fmt.Println("error while deleting session ")
+		fmt.Println("error while deleting session - ", err)
 	}
 }
